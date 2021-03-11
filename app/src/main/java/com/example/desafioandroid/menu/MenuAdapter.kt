@@ -19,14 +19,14 @@ class MenuAdapter(val menuItens: MutableList<MenuItens>):RecyclerView.Adapter<Me
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-        holder.courseName.text = menuItens[position].name
-        holder.courseImage.setImageResource(menuItens[position].image)
+        holder.dishName.text = menuItens[position].name
+        holder.dishImage.setImageResource(menuItens[position].image)
 
         holder.menuCard.setOnClickListener{
-            val intent = Intent(it.context,RestaurantActivity::class.java)
-            intent.putExtra("COURSEIMAGE", menuItens[position].name)
-            intent.putExtra("COURSENAME",menuItens[position].image)
-            intent.putExtra("COURSEDESCRIPTION",menuItens[position].description)
+            val intent = Intent(it.context, DishActivity::class.java)
+            intent.putExtra("DISHNAME", menuItens[position].name)
+            intent.putExtra("DISHIMAGE",menuItens[position].image)
+            intent.putExtra("DISHDESCRIPTION",menuItens[position].description)
             it.context.startActivity(intent)
         }
     }
@@ -35,7 +35,7 @@ class MenuAdapter(val menuItens: MutableList<MenuItens>):RecyclerView.Adapter<Me
 
     inner class MenuViewHolder(view: View):RecyclerView.ViewHolder(view){
         val menuCard by lazy { view.findViewById<CardView>(R.id.menu_card) }
-        val courseImage by lazy { view.findViewById<ImageView>(R.id.course_screen) }
-        val courseName by lazy { view.findViewById<TextView>(R.id.course_name) }
+        val dishImage by lazy { view.findViewById<ImageView>(R.id.course_screen) }
+        val dishName by lazy { view.findViewById<TextView>(R.id.course_name) }
     }
 }

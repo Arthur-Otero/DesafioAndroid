@@ -9,13 +9,11 @@ import com.example.desafioandroid.R
 
 class RestaurantActivity : AppCompatActivity() {
     val menu by lazy { findViewById<RecyclerView>(R.id.menu_itens) }
-    val toolbar by lazy { findViewById<Toolbar>(R.id.menu_toolbar) }
+    val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
-
-        //setSupportActionBar(toolbar)
 
         val restaurant = getRestaurant()
 

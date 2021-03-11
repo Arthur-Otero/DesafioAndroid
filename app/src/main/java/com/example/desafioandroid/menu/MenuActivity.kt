@@ -9,13 +9,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.desafioandroid.R
 
 class MenuActivity : AppCompatActivity() {
-    val image by lazy { findViewById<ImageView>(R.id.restaurantImage) }
-    val name by lazy { findViewById<TextView>(R.id.restaurantName) }
-    val menu by lazy { findViewById<RecyclerView>(R.id.courses) }
+    private val image by lazy { findViewById<ImageView>(R.id.restaurantImage) }
+    private val name by lazy { findViewById<TextView>(R.id.restaurantName) }
+    private val menu by lazy { findViewById<RecyclerView>(R.id.courses) }
+    private val toolbar by lazy { findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_menu) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        setSupportActionBar(toolbar)
+
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
         val extras = intent.extras
         val imageSrc = extras?.getInt("IMAGE")
@@ -32,19 +38,14 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun getItens() : MutableList<MenuItens> {
+        val text = "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusant doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis."
         val itensList = mutableListOf<MenuItens>()
-        itensList.add(MenuItens("Tony Roma's", "Av. Lavandisca, 717 - Indianópolis, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Aoyama - Moema", "Alameda dos Arapanés, 532 - Moema",R.drawable.raster))
-        itensList.add(MenuItens("Outback - Moema", "Av. Moaci, 187, 187 - Moema, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Sí Señor!", "Alameda Jauaperi, 626 - Moema",R.drawable.raster))
-        itensList.add(MenuItens("Tony Roma's", "Av. Lavandisca, 717 - Indianópolis, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Aoyama - Moema", "Alameda dos Arapanés, 532 - Moema",R.drawable.raster))
-        itensList.add(MenuItens("Outback - Moema", "Av. Moaci, 187, 187 - Moema, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Sí Señor!", "Alameda Jauaperi, 626 - Moema",R.drawable.raster))
-        itensList.add(MenuItens("Tony Roma's", "Av. Lavandisca, 717 - Indianópolis, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Aoyama - Moema", "Alameda dos Arapanés, 532 - Moema",R.drawable.raster))
-        itensList.add(MenuItens("Outback - Moema", "Av. Moaci, 187, 187 - Moema, São Paulo",R.drawable.raster))
-        itensList.add(MenuItens("Sí Señor!", "Alameda Jauaperi, 626 - Moema",R.drawable.raster))
+        itensList.add(MenuItens("Macarão com alho", text,R.drawable.raster))
+        itensList.add(MenuItens("Miojão", text,R.drawable.raster))
+        itensList.add(MenuItens("Lasanha", text,R.drawable.raster))
+        itensList.add(MenuItens("Macarrona", text,R.drawable.raster))
+        itensList.add(MenuItens("Pavê", text,R.drawable.raster))
+        itensList.add(MenuItens("Bife acebolado", text,R.drawable.raster))
         return itensList
     }
 }

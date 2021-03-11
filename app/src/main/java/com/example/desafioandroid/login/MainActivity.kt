@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import android.widget.Toolbar
 import com.example.desafioandroid.R
 import com.example.desafioandroid.restaurant.RestaurantActivity
 import com.google.android.material.textfield.TextInputEditText
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         registerButton.setOnClickListener(){
             val intent= Intent(this, RegisterActivity::class.java)
@@ -25,17 +27,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         logInButton.setOnClickListener{
-            buttonClick()
-            val intent= Intent(this, RestaurantActivity::class.java)
-            startActivity(intent)
+            if (buttonClick()) {
+                val intent = Intent(this, RestaurantActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
-    fun infos(){
-        val user = UserData()
-    }
-
-    private fun buttonClick (){
+    private fun buttonClick () : Boolean{
         val extras = intent.extras
         val nameExtras = extras?.getString("NAME")
         val emailExtras = extras?.getString("EMAIL")
@@ -53,17 +52,20 @@ class MainActivity : AppCompatActivity() {
             (emailError.isBlank()  || user == null) && passwordError.isBlank() ->{
                 email?.error = "Email incorreto"
                 password?.error = "Senha invalida"
+                return false
             }
             emailError.isBlank() || user == null->{
                 email?.error = "Email incorreto"
                 password?.error = null
+                return false
             }
             user.password != passwordError ->{
                 email?.error = null
                 password?.error = "Senha invalida"
+                return false
             }
             else ->{
-                Toast.makeText(this,"Sucesso",Toast.LENGTH_LONG).show()
+                return true
             }
         }
     }
