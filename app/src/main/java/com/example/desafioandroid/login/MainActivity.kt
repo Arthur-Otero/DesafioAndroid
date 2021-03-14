@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.Toast
 import android.widget.Toolbar
 import com.example.desafioandroid.R
+import com.example.desafioandroid.SingletonProfile
 import com.example.desafioandroid.restaurant.RestaurantActivity
 import com.google.android.material.textfield.TextInputEditText
 
@@ -21,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        registerButton.setOnClickListener(){
-            val intent= Intent(this, RegisterActivity::class.java)
+        registerButton.setOnClickListener() {
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        logInButton.setOnClickListener{
+        logInButton.setOnClickListener {
             if (buttonClick()) {
                 val intent = Intent(this, RestaurantActivity::class.java)
                 startActivity(intent)
@@ -34,37 +35,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun buttonClick () : Boolean{
+    private fun buttonClick(): Boolean {
         val extras = intent.extras
         val nameExtras = extras?.getString("NAME")
         val emailExtras = extras?.getString("EMAIL")
         val passwordExtras = extras?.getString("PASSWORD")
 
+        val userData = UserData()
+        userData.addUser(nameExtras, passwordExtras, emailExtras)
+
         val emailError = email.text.toString()
         val passwordError = password.text.toString()
 
-        val userData = UserData()
-        userData.addUser(nameExtras,emailExtras,passwordExtras)
-
         val user = userData.confirmationEmail(emailError)
 
-        when{
-            (emailError.isBlank()  || user == null) && passwordError.isBlank() ->{
+        when {
+            emailError.isBlank() && passwordError.isBlank() -> {
                 email?.error = "Email incorreto"
                 password?.error = "Senha invalida"
                 return false
             }
-            emailError.isBlank() || user == null->{
+            emailError.isBlank() || user == null -> {
                 email?.error = "Email incorreto"
                 password?.error = null
                 return false
             }
-            user.password != passwordError ->{
+            user.password != passwordError || passwordError.isBlank() -> {
                 email?.error = null
                 password?.error = "Senha invalida"
                 return false
             }
-            else ->{
+            else -> {
+                val singleton = SingletonProfile
+                singleton.nameProfile = "NOME: " + user.nome
+                singleton.emailProfile = "EMAIL: " + user.email
                 return true
             }
         }

@@ -16,7 +16,7 @@ class UserData{
 
     fun confirmationEmail(emailInfo: String): User? {
         user.forEach{
-            if (emailInfo == it.email){
+            if (it.email.equals(emailInfo)){
                 return it
             }
         }

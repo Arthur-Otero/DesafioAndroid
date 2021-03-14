@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Register"
         app:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"/>
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -57,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/white"
                 android:hint="Email"
-                android:inputType="text"
                 android:textColor="@android:color/holo_blue_dark"
                 tools:text="Teste" />
         </com.google.android.material.textfield.TextInputLayout>

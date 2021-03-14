@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeNoActionBar">
+        <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".menu.DishActivity" />
         <activity android:name=".menu.MenuActivity" />
         <activity android:name=".restaurant.RestaurantActivity" />
         <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.MainActivity">
+        <activity android:name=".login.MainActivity" />
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

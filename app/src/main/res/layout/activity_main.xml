@@ -57,7 +57,6 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/white"
                 android:hint="E-mail"
-                android:inputType="textEmailAddress"
                 android:textColor="@android:color/holo_blue_dark"
                 tools:text="Teste" />
         </com.google.android.material.textfield.TextInputLayout>
